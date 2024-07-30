@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage Shop</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Mortgage Shop</h1>
+        </header>
+        <div class="tabs">
+            <button class="tab-button" onclick="showPanel('customerDetails')">Customer Details</button>
+            <button class="tab-button" onclick="showPanel('calculate')">Calculate</button>
+            <button class="tab-button" onclick="showPanel('readyToGetBack')">Ready to Get Back</button>
+        </div>
+        
+        <div id="customerDetails" class="tab-content">
+            <h2>Customer Details</h2>
+            <form id="customerForm">
+                <label for="customerName">Customer Name:</label>
+                <input type="text" id="customerName" required>
+                
+                <label for="jewelryWeight">Jewelry Weight (g):</label>
+                <input type="number" id="jewelryWeight" step="0.01" required>
+                
+                <label for="metalPrice">Price per gram (on day of mortgage):</label>
+                <input type="number" id="metalPrice" step="0.01" required>
+                
+                <label for="mortgageDate">Date of Mortgage:</label>
+                <input type="date" id="mortgageDate" required>
+                
+                <label for="status">Status:</label>
+                <input type="text" id="status" value="Active" readonly>
+                
+                <button type="button" onclick="saveMortgage()">Save Mortgage</button>
+            </form>
+        </div>
+        
+        <div id="calculate" class="tab-content" style="display: none;">
+            <h2>Calculate</h2>
+            <form id="calculationForm">
+                <label for="calcDate">Date of Mortgage:</label>
+                <input type="date" id="calcDate" required>
+                
+                <button type="button" onclick="calculatePledge()">Calculate Pledge</button>
+                <button type="button" onclick="calculateInterest()">Calculate Interest</button>
+            </form>
+            
+            <h3>Pledged Amount: <span id="pledgedAmount"></span></h3>
+            <h3>Interest Rate: <span id="interestRateDisplay"></span></h3>
+            <h3>Total Payment Due: <span id="totalPayment"></span></h3>
+        </div>
+        
+        <div id="readyToGetBack" class="tab-content" style="display: none;">
+            <h2>Ready to Get Back</h2>
+            <form id="releaseForm">
+                <label for="releaseDate">Date of Release:</label>
+                <input type="date" id="releaseDate" required>
+                
+                <button type="button" onclick="releaseMortgage()">Release Mortgage</button>
+            </form>
+            
+            <h3>Total Payment Due: <span id="releaseTotalPayment"></span></h3>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js"></script>
+    <script src="config.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
